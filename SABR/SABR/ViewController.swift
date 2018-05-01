@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HomeModelProtocol {
     
     var feedItems: NSArray = NSArray()
-    var selectedLocation : LocationModel = LocationModel()
+    var selectedData : DataModel = DataModel()
     @IBOutlet weak var listTableView: UITableView!
     
     @IBOutlet weak var Label: UILabel!
@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         homeModel.delegate = self
         homeModel.downloadItems(firstName: First, lastName: Last)
         
-        Outputfield.text = "You searched for: \(First)"
+        //Outputfield.text = "You searched for: \(First)"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,10 +70,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellIdentifier: String = "BasicCell"
         let myCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
         // Get the location to be shown
-        let item: LocationModel = feedItems[indexPath.row] as! LocationModel
+        let item: DataModel = feedItems[indexPath.row] as! DataModel
         // Get references to labels of cell
         myCell.textLabel!.text = item.firstname! + " " + item.lastname!
-        myCell.detailTextLabel!.text = "RCPPS= " + item.address! + "| RC = "
+        //myCell.detailTextLabel!.text = "RCPPS= " + item.address! + "| RC = "
         return myCell
     }
 }

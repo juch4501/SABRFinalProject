@@ -8,15 +8,15 @@
 
 import Foundation
 
-class LocationModel: NSObject {
+class DataModel: NSObject {
     
     //properties
     
     var firstname: String!
     var lastname: String!
-    var address: String!
-    var latitude: String!
-    var longitude: String!
+    var RCPPS: String!
+    var RC: String!
+    //var longitude: String!
     
     
     //empty constructor
@@ -28,17 +28,10 @@ class LocationModel: NSObject {
     
     //construct with parameters
     
-    init(firstname: String, lastname: String, address: String, latitude: String, longitude: String) {
-        
+    init(firstname: String, lastname: String, RCPPS: String, RC: String) {
         self.firstname = firstname
         self.lastname = lastname
-        self.address = address
-        self.latitude = latitude
-        self.longitude = longitude
-        
+        self.RCPPS = RCPPS
+        self.RC = RC
     }
-    
-
-    
-    
 }

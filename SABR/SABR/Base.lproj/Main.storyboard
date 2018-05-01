@@ -33,30 +33,6 @@
                                     <action selector="Search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="25w-V1-IoO"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Lq-Sl-XNS">
-                                <rect key="frame" x="45" y="209" width="284" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.84739313471502586" green="0.84739313471502586" blue="0.84739313471502586" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment>
-                                        <string key="content">The RCPPS stat is meant to show you how well a player has played baseball defensively vs offensively overall for each of the last 3 seasons. A score of 1 indicates that a player plays equally defensively vs offensively. A score &lt;1 indicates that the player played better defensively and a score &gt;1 indicates that the player played better offensively.</string>
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.023286350454939653" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="11" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="z41-AI-gjD">
-                                <rect key="frame" x="110" y="327" width="154" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter a player's name: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWI-sC-ChN">
                                 <rect key="frame" x="16" y="38" width="343" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -110,7 +86,6 @@
                         <outlet property="FirstName" destination="d2x-sG-Ba3" id="nHt-kW-qnE"/>
                         <outlet property="Label" destination="XWI-sC-ChN" id="0hl-Ff-I0Y"/>
                         <outlet property="LastName" destination="ZfA-4N-dfW" id="PhV-O6-xiI"/>
-                        <outlet property="Outputfield" destination="z41-AI-gjD" id="OJ9-VX-f4F"/>
                         <outlet property="listTableView" destination="kh6-w9-Ks1" id="5jH-pn-9Ym"/>
                     </connections>
                 </viewController>
