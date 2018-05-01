@@ -16,7 +16,7 @@
 		AC1B4355208585E3001862B8 /* SABRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B4354208585E3001862B8 /* SABRTests.swift */; };
 		AC1B4360208585E3001862B8 /* SABRUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B435F208585E3001862B8 /* SABRUITests.swift */; };
 		AC51B3D220882F5600DD51A8 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51B3D120882F5600DD51A8 /* HomeModel.swift */; };
-		AC51B3D420882F6100DD51A8 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51B3D320882F6100DD51A8 /* LocationModel.swift */; };
+		AC51B3D420882F6100DD51A8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC51B3D320882F6100DD51A8 /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		AC1B435F208585E3001862B8 /* SABRUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SABRUITests.swift; sourceTree = "<group>"; };
 		AC1B4361208585E3001862B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC51B3D120882F5600DD51A8 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
-		AC51B3D320882F6100DD51A8 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		AC51B3D320882F6100DD51A8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +111,7 @@
 				AC1B434B208585E2001862B8 /* Info.plist */,
 				AC1B4343208585E2001862B8 /* SABR.xcdatamodeld */,
 				AC51B3D120882F5600DD51A8 /* HomeModel.swift */,
-				AC51B3D320882F6100DD51A8 /* LocationModel.swift */,
+				AC51B3D320882F6100DD51A8 /* DataModel.swift */,
 			);
 			path = SABR;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 				AC51B3D220882F5600DD51A8 /* HomeModel.swift in Sources */,
 				AC1B433F208585E2001862B8 /* ViewController.swift in Sources */,
 				AC1B4345208585E2001862B8 /* SABR.xcdatamodeld in Sources */,
-				AC51B3D420882F6100DD51A8 /* LocationModel.swift in Sources */,
+				AC51B3D420882F6100DD51A8 /* DataModel.swift in Sources */,
 				AC1B433D208585E2001862B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
