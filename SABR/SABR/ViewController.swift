@@ -13,25 +13,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var feedItems: NSArray = NSArray()
     var selectedData : DataModel = DataModel()
     @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var OutfieldText: UITextView!
     
     @IBOutlet weak var Label: UILabel!
     @IBOutlet weak var LastName: UITextField!
     @IBOutlet weak var FirstName: UITextField!
+    @IBOutlet weak var Year: UITextField!
     
+    let RCLA13: Double = 14.239
+    let RCLA14: Double = 13.5131
+    let RCLA15: Double = 13.7069
+    let RCLA16: Double = 14.4487
+    let RCLA17: Double = 17.4335
     
-    //use?
-    @IBOutlet weak var Outputfield: UITextView!
+    let RPLA13: Double = 102.4355
+    let RPLA14: Double = 101.5140
+    let RPLA15: Double = 94.3442
+    let RPLA16: Double = 93.9130
+    let RPLA17: Double = 110.1275
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //for input text
         LastName.delegate = self
         FirstName.delegate = self
+        Year.delegate = self
         
         //set delegates and initialize homeModel
         self.listTableView.delegate = self
         self.listTableView.dataSource = self
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,12 +54,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         let First: String = FirstName.text!
         let Last: String = LastName.text!
+        let Season: String = Year.text!
 
-        let homeModel = HomeModel()
-        homeModel.delegate = self
-        homeModel.downloadItems(firstName: First, lastName: Last)
-        
-        //Outputfield.text = "You searched for: \(First)"
+        if ((FirstName.text?.isEmpty)! || (LastName.text?.isEmpty)! || (Year.text?.isEmpty)!){
+                OutfieldText.text = "Please enter valid text into the text fields. Search not processed."
+        }
+        else {
+            //OutfieldText.text = "This is the year you entered: \(Year.text!)"
+            
+            let homeModel = HomeModel()
+            homeModel.delegate = self
+            homeModel.downloadItems(firstName: First, lastName: Last, seasonYear: Season)
+            
+            if (Year.text == "2013"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA13) \n\nRuns Prevented League Average: \(RPLA13) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2014"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA14) \n\nRuns Prevented League Average: \(RPLA14) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2015"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA15) \n\nRuns Prevented League Average: \(RPLA15) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2016"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA16) \n\nRuns Prevented League Average: \(RPLA16) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2017"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA17) \n\nRuns Prevented League Average: \(RPLA17) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text != "2013" || Year.text != "2014" || Year.text != "2015" || Year.text != "2016" || Year.text != "2017"){
+                OutfieldText.text = "Please enter a valid year"
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -72,9 +108,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Get the location to be shown
         let item: DataModel = feedItems[indexPath.row] as! DataModel
         // Get references to labels of cell
-        myCell.textLabel!.text = item.firstname! + " " + item.lastname!
-        //myCell.detailTextLabel!.text = "RCPPS= " + item.address! + "| RC = "
-        return myCell
+        print(item)
+        if (item.RCPPS == "Null") {
+            myCell.textLabel!.text = FirstName.text! + " " + LastName.text!
+            myCell.detailTextLabel!.text = "RCPPS = N/A. Read Description Above"
+            return myCell
+        }
+        else{
+            myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
+            myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!)"
+            return myCell
+        }
     }
 }
 

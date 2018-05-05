@@ -20,12 +20,12 @@ class HomeModel: NSObject, URLSessionDataDelegate {
     weak var delegate: HomeModelProtocol!
     
     var data = Data()
+
+    var urlPath: String = "http://10.203.54.53:8080/middlelayer.php?"
     
-    var urlPath: String = "http://localhost:8080/middlelayer.php?" //this will be changed to the path where service.php lives
-    
-    func downloadItems(firstName: String, lastName: String) {
+    func downloadItems(firstName: String, lastName: String, seasonYear: String) {
         
-        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName)!
+        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear)!
         let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
         
         let task = defaultSession.dataTask(with: url) { (data, response, error) in
@@ -43,7 +43,6 @@ class HomeModel: NSObject, URLSessionDataDelegate {
     }
     
     func parseJSON(_ data:Data) {
-        
         var jsonResult = NSArray()
         
         do{
@@ -63,16 +62,21 @@ class HomeModel: NSObject, URLSessionDataDelegate {
             let cellBlock = DataModel()
             
             //the following insures none of the JsonElement values are nil through optional binding
-            if let firstname = jsonElement["FirstName"] as? String,
-                let lasttname = jsonElement["LastName"] as? String,
-                let RCPPS = jsonElement["Address"] as? String, //change names to what JSON says
-                let RC = jsonElement["Latitude"] as? String //change names to what JSON says
+            if let firstname = jsonElement["nameFirst"] as? String,
+                let lasttname = jsonElement["nameLast"] as? String,
+                let team = jsonElement["teamID"] as? String,
+                let RCPPS = jsonElement["RCPPS"] as? String, //change names to what JSON says
+                let RC = jsonElement["RC"] as? String, //change names to what JSON says
+                let RP = jsonElement["RP"] as? String
+                //let WAR = jsonElement["Latitude"] as? String //change names to what JSON says
             {
                 
                 cellBlock.firstname = firstname
                 cellBlock.lastname = lasttname
+                cellBlock.team = team
                 cellBlock.RCPPS = RCPPS
                 cellBlock.RC = RC
+                cellBlock.RP = RP
             }
             dataBlocks.add(cellBlock)
         }
