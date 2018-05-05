@@ -25,7 +25,7 @@ class HomeModel: NSObject, URLSessionDataDelegate {
     
     func downloadItems(firstName: String, lastName: String, seasonYear: String) {
         
-        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear)!
+        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear + "&" + "TB=" + "1")!
         let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
         
         let task = defaultSession.dataTask(with: url) { (data, response, error) in
@@ -35,6 +35,25 @@ class HomeModel: NSObject, URLSessionDataDelegate {
             }
             else {
                 print("Data downloaded")
+                self.parseJSON(data!)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func downloadItemsWithWAR(firstName: String, lastName: String, seasonYear: String) {
+        
+        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear + "&" + "TB=2")!
+        let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
+        
+        let task = defaultSession.dataTask(with: url) { (data, response, error) in
+            
+            if error != nil {
+                print("Failed to download WAR data")
+            }
+            else {
+                print("Data downloadedWAR")
                 self.parseJSON(data!)
             }
         }
@@ -65,10 +84,11 @@ class HomeModel: NSObject, URLSessionDataDelegate {
             if let firstname = jsonElement["nameFirst"] as? String,
                 let lasttname = jsonElement["nameLast"] as? String,
                 let team = jsonElement["teamID"] as? String,
-                let RCPPS = jsonElement["RCPPS"] as? String, //change names to what JSON says
-                let RC = jsonElement["RC"] as? String, //change names to what JSON says
-                let RP = jsonElement["RP"] as? String
-                //let WAR = jsonElement["Latitude"] as? String //change names to what JSON says
+                let RCPPS = jsonElement["RCPPS"] as? String,
+                let RC = jsonElement["RC"] as? String,
+                let RP = jsonElement["RP"] as? String,
+                let BWAR = jsonElement["bwar"] as? String,
+                let PWAR = jsonElement["pwar"] as? String
             {
                 
                 cellBlock.firstname = firstname
@@ -77,6 +97,8 @@ class HomeModel: NSObject, URLSessionDataDelegate {
                 cellBlock.RCPPS = RCPPS
                 cellBlock.RC = RC
                 cellBlock.RP = RP
+                cellBlock.BWAR = BWAR
+                cellBlock.PWAR = PWAR
             }
             dataBlocks.add(cellBlock)
         }

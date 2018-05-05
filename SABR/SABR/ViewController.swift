@@ -34,11 +34,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
         //for input text
         LastName.delegate = self
+        LastName.tag = 1
         FirstName.delegate = self
+        FirstName.tag = 0
         Year.delegate = self
+        Year.tag = 2
         
         //set delegates and initialize homeModel
         self.listTableView.delegate = self
@@ -50,6 +53,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
 
+    
+    @IBAction func SWAR(_ sender: Any) {
+        let First: String = FirstName.text!
+        let Last: String = LastName.text!
+        let Season: String = Year.text!
+        
+        if ((FirstName.text?.isEmpty)! || (LastName.text?.isEmpty)! || (Year.text?.isEmpty)!){
+            OutfieldText.text = "Please enter valid text into the text fields. Search not processed."
+        }
+        else {
+            //OutfieldText.text = "This is the year you entered: \(Year.text!)"
+            
+            let homeModel = HomeModel()
+            homeModel.delegate = self
+            homeModel.downloadItemsWithWAR(firstName: First, lastName: Last, seasonYear: Season)
+            
+            if (Year.text == "2013"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA13) \n\nRuns Prevented League Average: \(RPLA13) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2014"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA14) \n\nRuns Prevented League Average: \(RPLA14) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2015"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA15) \n\nRuns Prevented League Average: \(RPLA15) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2016"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA16) \n\nRuns Prevented League Average: \(RPLA16) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text == "2017"){
+                OutfieldText.text = "SCROLL THROUGH! \n\nRuns Created League Average: \(RCLA17) \n\nRuns Prevented League Average: \(RPLA17) \n\nAn RCPPS score of 'N/A' indicates that the player neither scored nor prevented any runs during the season. \n\nA RCPPS score of 1 indicates equality in offensive and defensive performance during the season. \n\nA score < 1 indicates stronger defensive performance. \n\nA score > 1 indicates stronger offensive performance."
+            }
+            else if (Year.text != "2013" || Year.text != "2014" || Year.text != "2015" || Year.text != "2016" || Year.text != "2017"){
+                OutfieldText.text = "Please enter a valid year"
+            }
+        }
+    }
     @IBAction func Search(_ sender: Any) {
 
         let First: String = FirstName.text!
@@ -60,8 +99,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 OutfieldText.text = "Please enter valid text into the text fields. Search not processed."
         }
         else {
-            //OutfieldText.text = "This is the year you entered: \(Year.text!)"
-            
             let homeModel = HomeModel()
             homeModel.delegate = self
             homeModel.downloadItems(firstName: First, lastName: Last, seasonYear: Season)
@@ -108,24 +145,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Get the location to be shown
         let item: DataModel = feedItems[indexPath.row] as! DataModel
         // Get references to labels of cell
-        print(item)
         if (item.RCPPS == "Null") {
+            myCell.textLabel?.textAlignment = .center
             myCell.textLabel!.text = FirstName.text! + " " + LastName.text!
             myCell.detailTextLabel!.text = "RCPPS = N/A. Read Description Above"
             return myCell
         }
         else{
-            myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
-            myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!)"
-            return myCell
+            if(item.BWAR == "0.00" && item.BWAR == "0.00"){
+                myCell.textLabel?.textAlignment = .center
+                myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
+                myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!)"
+                return myCell
+            }
+            else if(item.BWAR == "0.00" && item.PWAR != "0.00"){
+                myCell.textLabel?.textAlignment = .center
+                myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
+                myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!) \nBatting War = N/A \nPitching War = \(item.PWAR!)"
+                return myCell
+            }
+            else if(item.BWAR != "0.00" && item.PWAR == "0.00"){
+                myCell.textLabel?.textAlignment = .center
+                myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
+                myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!) \nBatting War = \(item.BWAR!) \nPitching War = N/A"
+                return myCell
+            }
+            else{
+                myCell.textLabel?.textAlignment = .center
+                myCell.textLabel!.text = item.firstname! + " " + item.lastname! + " Team: " + item.team!
+                myCell.detailTextLabel!.text = "RCPPS= \(item.RCPPS!) \nRC = \(item.RC!) \nRP = \(item.RP!) \nBatting War = \(item.BWAR!) \nPitching War = \(item.PWAR!)"
+                return myCell
+            }
         }
     }
 }
 
 extension ViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        // Try to find next responder
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
+        //textField.resignFirstResponder()
+        //return true
     }
 
+}
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

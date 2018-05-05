@@ -18,7 +18,8 @@ class DataModel: NSObject {
     var RCPPS: String?
     var RC: String!
     var RP: String!
-    //var WAR: String!
+    var BWAR: String?
+    var PWAR: String?
     
     
     //empty constructor
@@ -30,13 +31,14 @@ class DataModel: NSObject {
     
     //construct with parameters
     
-    init(firstname: String, lastname: String, team: String, RCPPS: String, RC: String, RP: String) {
+    init(firstname: String, lastname: String, team: String, RCPPS: String, RC: String, RP: String, BWAR: String, PWAR: String) {
         self.firstname = firstname
         self.lastname = lastname
         self.team = team
         self.RCPPS = RCPPS
         self.RC = RC
         self.RP = RP
-        //self.WAR = WAR
+        self.BWAR = BWAR
+        self.PWAR = PWAR
     }
 }

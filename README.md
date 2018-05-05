@@ -1,8 +1,23 @@
 # SABRFinalProject
-Sabermetrics Final Project
+Sabermetrics Final Project: The RCPPS Stat
+
+
+The statistic that I created is called the RCPPS stat. This application is an iOS application that allows you to enter any MLB player from the years 2013 to 2017 in order to calculate this new statistic. The RCPPS (Runs Created/Prevented Per Season) is a statistic that uses a combination of Runs Created per season and Runs Prevented per season in order to attempt to give fans a more accurate idea of how well a player plays defensively vs offensively. 
+There a countless number of statistics in the sabermetrics research community but I believe that my statistic will be very easy to read and beneficial to the non-sabermetrics community.  The RCPPS statistic is closely related to the Wins Above Replacement statistic. While the WAR statistic aims to summarize a player’s total contributions to their team in one statistic, my statistic focuses more on how well a player prevented and created runs, arguably, the most important part of the game. This is something that isn’t really shown in current statistics as most statistics are very specific to a certain skill that a player’s showcases while my statistic immediately gets down to the nitty gritty and displays how well a player performed after the fact. I believe this is a good statistic for people who aren’t that familiar with baseball. This application provides user the ability to see now only how well a player played the game of baseball overall and also how well this player played compared to their league. The RCPPS statistic can be seen as more of an English version statistic where all users can walk away with an idea of how good a player is without having to go into specifics that other statistics make the average Joe say “Huh?”. 
+The statistic uses a combination of calculations which involve calculating a players’ total Runs Created for the season and then calculating a players’ total Runs Prevented for the season. Runs Created estimates a player’s offensive contribution in terms of total runs created while Runs Prevented estimates a player’s defensive contribution in terms of total runs prevented. I have used one of the most basic formulas for Runs Created which includes these different statistics: Total Bases, At-Bats, Walks, Hits by Pitch, Caught Stealing, Grounded into Double Play, and Hits. Runs prevented is a simple combination of how many putouts and assists a player had per season minus any errors they accumulated. 
+To calculate Runs Created, this formula was followed: ((Total Bases (TB) * (Hits (H) + Walks (BB) + Hits by Pitch (HBP) – Caught Stealing (CS) – Grounded into Double Plays (GiDP))) / (AB + BB)). In order to calculate total bases, the following formula was used, (Singles (HITS)) + (Doubles) + (Triples x 2) + (Home Runs x 3), as recommended on fangraphs.com. Calculating the number Runs Prevented involves the simple addition of Putouts and Assists (Putouts + Assists) minus any Errors (E) the player had. Since different defensive positions prevent different amounts of runs, I have calculated the league averages of runs prevented for that season and display it when a user searches for a player in order for the user to then see how the player compares to the league. In turn, the final RCPPS statistic formula is RCPPS = RC / RP. If the score is greater than one, the player played better offensively, if the score is less than 1, the player played better defensively, and of course, any player with a value closest to one will be a player that plays both well offensively and defensively. If a player has a really low RCPPS score, it does not necessarily mean that they only play one position well and in order to eliminate any misconceptions, both Runs created and runs prevented league averages are posted after a search is made, along with the players exact number of runs created and prevented during that season to again, compare with the league averages. 
+This iOS app is optimized to work on Apple’s iPhone X. All the data is pulled from my SQL, localhost lahman2017 database. The middle layer to query the database and return results to the app consists of a simple .php file hosted on my local apache server. To run the application, simply follow the instructions below to install it onto your device and then follow the on-screen instructions to retrieve any MLB players RCPPS score. 
 
 To Use:
-1.) Download the SABR folder
-2.) Open Xcode and Click on "Open Another Project"
-3.) Navigate to the SABR folder you downloaded and open that folder as the project.
-4.) Launch on the Xcode Simulator!
+1.) Download the SABR folder 
+2.) Open Xcode and Click on "Open Another Project" 
+3.) Navigate to the SABR folder you downloaded and open that folder as the project. 
+4.) Launch on the Xcode Simulator and or your device!
+5.) Enter the information requested and read the on-screen information for more details.
+
+Formulas:
+•    TB (Total Bases) = (Singles (Hits)) + (Doubles) + (Triples x 2) + (Home Runs x 3)
+•    RC (Runs Created) = ((Total Bases (TB) * (Hits (H) + Walks (BB) + Hits by Pitch (HBP) – Caught Stealing (CS) – Grounded into Double Plays (GiDP))) / (At-Bats (AB) + Walks (BB)))
+•    RP (Runs Prevented) = ((Putouts (PO) + Assists(A)) – Errors(E))
+•    RCPPS (Runs Created/Prevented Per Season) = RC / RP
+
