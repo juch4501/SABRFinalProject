@@ -25,7 +25,7 @@ class HomeModel: NSObject, URLSessionDataDelegate {
     
     func downloadItems(firstName: String, lastName: String, seasonYear: String) {
         
-        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear + "&" + "TB=" + "1")!
+        let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear)!
         let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
         
         let task = defaultSession.dataTask(with: url) { (data, response, error) in
@@ -42,7 +42,7 @@ class HomeModel: NSObject, URLSessionDataDelegate {
         task.resume()
     }
     
-    func downloadItemsWithWAR(firstName: String, lastName: String, seasonYear: String) {
+   /* func downloadItemsWithWAR(firstName: String, lastName: String, seasonYear: String) {
         
         let url: URL = URL(string: urlPath + "FN=" + firstName + "&" + "LN=" + lastName + "&" + "YR=" + seasonYear + "&" + "TB=2")!
         let defaultSession = Foundation.URLSession(configuration: URLSessionConfiguration.default)
@@ -59,7 +59,7 @@ class HomeModel: NSObject, URLSessionDataDelegate {
         }
         
         task.resume()
-    }
+    }*/
     
     func parseJSON(_ data:Data) {
         var jsonResult = NSArray()
