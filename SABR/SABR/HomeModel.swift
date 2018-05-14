@@ -21,7 +21,8 @@ class HomeModel: NSObject, URLSessionDataDelegate {
     
     var data = Data()
 
-    var urlPath: String = "http://10.203.54.53:8080/middlelayer.php?"
+    var urlPath: String = "http://10.0.0.31:8080/middlelayer.php?"
+    //var urlPath: String = "http://10.203.54.53:8080/middlelayer.php?"
     
     func downloadItems(firstName: String, lastName: String, seasonYear: String) {
         
